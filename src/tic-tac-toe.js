@@ -11,21 +11,22 @@ class TicTacToe {
     }
 
     nextTurn(rowIndex, columnIndex) {
-        if (this.gamefield[rowIndex][columnIndex] === 'x' || this.gamefield[rowIndex][columnIndex] === 'o') {
+        if (this.gamefield[rowIndex][columnIndex]) {
             return;
         }
-
         this.gamefield[rowIndex][columnIndex] = this.currentPlayer;
         if (this.currentPlayer === 'x') {
-            return this.currentPlayer = 'o'
-        }
-        if (this.currentPlayer === 'o') {
-            return this.currentPlayer = 'x'
-        }
+            this.currentPlayer = 'o'
+        } else { this.currentPlayer = 'x' }
     }
 
+
+
+
     isFinished() {
-        return this.currentPlayer.getWinner();
+        if (this.noMoreTurns() || this.getWinner()) {
+            return true;
+        } else { return false }
     }
 
     getWinner() {
@@ -86,15 +87,17 @@ class TicTacToe {
         for (let i = 0; i < this.gamefield.length; i++) {
             for (let j = 0; j < this.gamefield[i].length; j++) {
                 if (this.gamefield[i][j] === null) {
-                    false;
+                    return false;
                 }
             }
         }
         return true;
     }
 
+
+
     isDraw() {
-        if (currentPlayer.isFinished() && currentPlayer.getWinner() === 'null') {
+        if (this.isFinished() && this.getWinner() === null) {
             return true;
         } else { return false }
     }
